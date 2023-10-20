@@ -10,10 +10,10 @@ function TodoForm(props) {
     const handleSubmit = x =>{
         x.preventDefault();
 
-        // props.onSumbit({
-        //     id: Math.floor(Math.random() * 10000),
-        //     text: input 
-        // });
+        props.onSumbit({
+            id: Math.floor(Math.random() * 10000),
+            text: input 
+        });
 
         setInput('')
     };
