@@ -9,6 +9,10 @@ const [newItem, setNewItem] = useState("");
 const [items, setItems] = useState([]);
 //------------------------------------
 
+//Edycja
+const [editItemIndex, setEditItemIndex] = useState(null);
+const [editMode, setEditMode] = useState(false);
+//------------------------------------
 
 const writingItem = e =>{
   e.preventDefault();
@@ -44,6 +48,36 @@ function deleteItem(id){
   setItems(array);
 }
 
+function editItem(id){
+  setEditMode(true);
+  setEditItemIndex(id);
+  const itemToEdit = items.find(item => item.id === id);
+  setNewItem(itemToEdit.value);
+}
+
+function saveItem(id) {
+  if(!newItem){
+    return
+  }
+
+  const updatedItems = items.map(item => {
+    
+      
+    
+    if (item.id === editItemIndex) {
+      return { ...item, value: newItem };
+    }
+    return item;
+  });
+
+  
+  
+  setItems(updatedItems);
+  setNewItem("");
+  setEditMode(false);
+  setEditItemIndex(null);
+}
+
   return (
     <div className="todoApp" >
 
@@ -58,12 +92,16 @@ function deleteItem(id){
           />
             
           
-        <button className="todoButton" onClick={addItem}>Add</button>
+            {editMode ? (
+          <button className="todoButton" onClick={saveItem}>Zapisz</button>
+        ) : (
+          <button className="todoButton" onClick={addItem}>Dodaj</button>
+        )}
       </div>
       <ul>
         {items.map(item =>{
           return(
-            <li key={item.id}>{item.value} <button onClick={() => deleteItem(item.id)}>X</button></li>
+            <li key={item.id}>{item.value} <button onClick={() => editItem(item.id)}>Edit</button><button onClick={() => deleteItem(item.id)}>X</button></li>
           )
         })}
 
