@@ -2,6 +2,7 @@
 import './App.css';
 import React, {useState} from 'react';
 
+
 function App() {
 const [newItem, setNewItem] = useState("");
 
@@ -102,7 +103,7 @@ function saveItem(id) {
         <ul>
           {items.map(item =>{
             return(
-              <li key={item.id}>{item.value} <button onClick={() => editItem(item.id)}>Edit</button><button onClick={() => deleteItem(item.id)}>X</button></li>
+              <li className="todoTask" key={item.id}>{item.value} <span className="buttons"><button onClick={() => editItem(item.id)}>Edit</button><button onClick={() => deleteItem(item.id)}>X</button></span></li>
             )
           })}
 

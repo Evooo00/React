@@ -1,0 +1,75 @@
+body{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background: linear-gradient(
+      90deg,
+      rgba(48, 16, 255, 1) 0%,
+      rgba(100, 115, 255, 1) 100%
+  );
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+  'Lucida Sans', Arial, sans-serif;
+}
+
+
+
+.todoApp{
+  width: 550px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #161a2b;
+  border-radius: 10px;
+}
+
+.todoApp h1{
+  color: white;
+  
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.todoInput{
+  width: 300px;
+  padding: 14px 14px 14px 14px;
+  border: 2px solid #5d0cff;
+  background-color: transparent;
+  border-radius: 10px 0 0 10px;
+  color: white;
+  margin: 10px 0 20px 0;
+}
+
+.todoButton{
+  width: 80px;
+  padding: 16px;
+  background: linear-gradient(
+      90deg,
+      rgba(93, 12, 255, 1) 0%,
+      rgba(155, 0, 250, 1) 100%
+  ); 
+  cursor: pointer;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  color: white;
+  
+}
+
+.todoTask{
+  color: white;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  background-color: orange;
+  padding: 14px;
+  border-radius: 4px;
+  margin: 10px 0 10px 0;
+}
