@@ -68,8 +68,24 @@ ul{
   width: 400px;
   display: flex;
   justify-content: space-between;
-  background-color: orange;
+  background: linear-gradient(
+  90deg,
+  rgb(236, 164, 29) 0%,
+  rgb(214, 186, 130) 100%
+
+  );
   padding: 14px;
   border-radius: 4px;
   margin: 10px 0 10px 0;
+  height: 25px;
+  
+}
+
+.mainButtons{
+  
+  background: initial;
+  border: initial;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 0;
 }
