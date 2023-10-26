@@ -79,35 +79,37 @@ function saveItem(id) {
 }
 
   return (
-    <div className="todoApp" >
+    
+      <div className="todoApp" >
 
 
-      <h1>Todo List</h1>
-      <div>
-        <input
-          className="todoInput"
-          placeholder="Add todo"
-          value={newItem}  
-          onChange={writingItem}
-          />
+        <h1>What's your plan for today? :)</h1>
+        <div>
+          <input
+            className="todoInput"
+            placeholder="Add todo"
+            value={newItem}  
+            onChange={writingItem}
+            />
+              
             
-          
-            {editMode ? (
-          <button className="todoButton" onClick={saveItem}>Zapisz</button>
-        ) : (
-          <button className="todoButton" onClick={addItem}>Dodaj</button>
-        )}
+              {editMode ? (
+            <button className="todoButton" onClick={saveItem}>Zapisz</button>
+          ) : (
+            <button className="todoButton" onClick={addItem}>Dodaj</button>
+          )}
+        </div>
+        <ul>
+          {items.map(item =>{
+            return(
+              <li key={item.id}>{item.value} <button onClick={() => editItem(item.id)}>Edit</button><button onClick={() => deleteItem(item.id)}>X</button></li>
+            )
+          })}
+
+        </ul>
+
       </div>
-      <ul>
-        {items.map(item =>{
-          return(
-            <li key={item.id}>{item.value} <button onClick={() => editItem(item.id)}>Edit</button><button onClick={() => deleteItem(item.id)}>X</button></li>
-          )
-        })}
-
-      </ul>
-
-    </div>
+    
   );
 }
 
