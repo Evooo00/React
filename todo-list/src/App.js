@@ -1,19 +1,35 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import { BiSolidEdit } from "react-icons/bi";
+import supabase from "./supabaseClient"
 
 function App() {
   const [newItem, setNewItem] = useState("");
+  console.log(supabase)
 
-  //Creating array for holding all items
-  const [items, setItems] = useState([]);
-  //------------------------------------
+  
 
-  //Edycja
   const [editItemIndex, setEditItemIndex] = useState(null);
+
   const [editMode, setEditMode] = useState(false);
-  //------------------------------------
+
+  
+  const [items, setItems] = useState([]);
+
+  const [Todos, setTodos] = useState([]);
+  
+  useEffect(() => {
+    getTodos();
+  })
+  console.log("poszło")
+  async function getTodos(){
+    const {data} = await supabase.from("Todos").select();
+    setTodos(data);
+  }
+  console.log("poszło")
+  
+ 
 
   const writingItem = (e) => {
     e.preventDefault();
@@ -91,7 +107,10 @@ function App() {
           </button>
         )}
       </div>
+      
+      {console.log(Todos)}
       <ul>
+        
         {items.map((item) => {
           return (
             <li className="todoTask" key={item.id}>
