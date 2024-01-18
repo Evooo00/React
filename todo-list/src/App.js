@@ -5,15 +5,7 @@ import { BiSolidEdit } from "react-icons/bi";
 import supabase from "./supabaseClient"
 
 function App() {
-  const [newItem, setNewItem] = useState("");
-  console.log(supabase)
-
   
-
-  const [editItemIndex, setEditItemIndex] = useState(null);
-
-  const [editMode, setEditMode] = useState(false);
-
   
   const [items, setItems] = useState([]);
 
@@ -21,15 +13,12 @@ function App() {
   
   useEffect(() => {
     getTodos();
-  })
-  console.log("poszło")
+  }, [])
+  
   async function getTodos(){
     const {data} = await supabase.from("Todos").select();
     setTodos(data);
   }
-  console.log("poszło")
-  
- 
 
   const writingItem = (e) => {
     e.preventDefault();
@@ -37,94 +26,84 @@ function App() {
     setNewItem(e.target.value);
   };
 
-  function addItem() {
-    //console.log("test");
-    if (!newItem) {
-      return;
+
+  const [newItem, setNewItem] = useState('');
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log(newItem)
+
+    const {data, error} = await supabase
+      .from("Todos")
+      .insert([{Content: newItem}]);
+
+    if(error){
+      console.log("Error")
     }
-
-    const item = {
-      id: Math.floor(Math.random() * 1000000),
-      value: newItem,
-    };
-
-    setItems((oldList) => [...oldList, item]);
-    setNewItem("");
-
-    // console.log(items);
-  }
-
-  function deleteItem(id) {
-    // console.log(id);
-
-    const array = items.filter((item) => item.id !== id);
-    setItems(array);
-  }
-
-  function editItem(id) {
-    setEditMode(true);
-    setEditItemIndex(id);
-    const itemToEdit = items.find((item) => item.id === id);
-    setNewItem(itemToEdit.value);
-  }
-
-  function saveItem(id) {
-    if (!newItem) {
-      return;
+    if(data){
+      console.log(data)
     }
+    
+  }
 
-    const updatedItems = items.map((item) => {
-      if (item.id === editItemIndex) {
-        return { ...item, value: newItem };
+  function reloadWebsite(){
+    window.location.reload(false);
+  }
+
+  
+  async function handleDelete(e){
+  
+
+    const {data, error} = await supabase
+      .from("Todos")
+      .delete()
+      .eq('id', e)
+      console.log(e)
+      
+      if(error){
+        console.log(error)
       }
-      return item;
-    });
-
-    setItems(updatedItems);
-    setNewItem("");
-    setEditMode(false);
-    setEditItemIndex(null);
+      if(data){
+        console.log(data)
+        
+      }
+      reloadWebsite();
   }
 
   return (
     <div className="todoApp">
       <h1>What's your plan for today? :)</h1>
       <div>
-        <input
-          className="todoInput"
-          placeholder="Add todo"
-          value={newItem}
-          onChange={writingItem}
-        />
-
-        {editMode ? (
-          <button className="todoButton" onClick={saveItem}>
-            Zapisz
-          </button>
-        ) : (
-          <button className="todoButton" onClick={addItem}>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="todoInput"
+            type="text"
+            placeholder="Add todo"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+          />
+          <button className="todoButton" type="submit" onClick={reloadWebsite}>
             Dodaj
           </button>
-        )}
+
+        </form>
+        
+        
       </div>
       
-      {console.log(Todos)}
+      
       <ul>
         
-        {items.map((item) => {
+        {
+        Todos.map((item) => {
           return (
             <li className="todoTask" key={item.id}>
-              {item.value}{" "}
+              {item.Content}
               <span className="buttons">
                 <button
                   className="mainButtons"
-                  onClick={() => editItem(item.id)}
-                >
-                  <BiSolidEdit />
-                </button>
-                <button
-                  className="mainButtons"
-                  onClick={() => deleteItem(item.id)}
+                  onClick={() => handleDelete(item.id)}
                 >
                   <TiDeleteOutline />
                 </button>
