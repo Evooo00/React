@@ -94,3 +94,8 @@ button {
   grid-area: equal;
   justify-self: center;
 }
+
+.fullResult {
+  font-size: 18px;
+  color: grey;
+}
