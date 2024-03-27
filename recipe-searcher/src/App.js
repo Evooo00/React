@@ -1,43 +1,56 @@
 import "./App.css";
 import { products } from "./products";
+import { recipes } from "./recipes";
 import React, { useState } from "react";
 
-console.log(products);
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-
-    setInputValue(event.target.value);
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchedProducts = document.getElementById("searchedProducts");
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+    setSearchTerm(e.target.value);
   };
 
-  const handleItemClick = (value) => {
+  const handleOnClick = (value) => {
     setInputValue(value);
     setSearchTerm("");
   };
 
   const results = !searchTerm
     ? []
-    : products.filter((product) =>
-        product.toLowerCase().includes(searchTerm.toLocaleLowerCase()),
-      );
-
+    : products.filter((product) => {
+        return product
+          .toLocaleLowerCase()
+          .includes(searchTerm.toLocaleLowerCase());
+      });
   return (
     <div className="container">
       <h1>Recipe searcher</h1>
-      <input
-        className="searchingProductInput"
-        placeholder="Search for a product"
-        onChange={handleChange}
-        value={inputValue}
-      />
-      <div className="selectedProducts">
+      <div className="inputAndButton">
+        <input
+          className="searchingProductInput"
+          placeholder="Search for a product"
+          onChange={handleChange}
+          value={inputValue}
+        />
+        {/* <button className="buttonForAddingProducts">Add</button> */}
+      </div>
+
+      <div id="searchedProducts" className="searchedProducts">
         {results.map((item) => (
-          <div key={item} onClick={() => handleItemClick(item)}>
+          <div
+            className="product"
+            key={item}
+            onClick={() => handleOnClick(item)}
+          >
             {item}
           </div>
+        ))}
+      </div>
+      <div className="selectedProducts">
+        {recipes.map((recipe) => (
+          <div key={recipe.id}>{recipe.ingredients}</div>
         ))}
       </div>
     </div>

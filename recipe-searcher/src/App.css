@@ -12,3 +12,22 @@
   border-radius: 10px;
   padding: 0 10px 0 10px;
 }
+
+.searchingProductInput:focus {
+  border-color: lightgrey;
+  outline: none;
+}
+
+.searchedProducts {
+  border: 1px lightgrey solid;
+  width: 200px;
+  padding: 10px 10px 0 10px;
+  position: fixed;
+  top: 120px;
+  border-top: none;
+  background-color: white;
+}
+
+.product {
+  margin: 5px 0 5px 0;
+}
