@@ -29,6 +29,10 @@
   background-color: white;
 }
 
+.showOrHideSearchedProducts {
+  display: none;
+}
+
 .product {
   margin: 5px 0 5px 0;
 }

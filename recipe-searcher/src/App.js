@@ -7,6 +7,8 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
+  const searchedProducts = document.querySelector(".searchedProducts");
+
   const handleChange = (e) => {
     setInputValue(e.target.value);
     setSearchTerm(e.target.value);
@@ -16,6 +18,12 @@ function App() {
     setInputValue(value);
     setSearchTerm(value);
   };
+
+  if (!searchTerm) {
+    searchedProducts.classList.add("showOrHideSearchedProducts");
+  } else {
+    searchedProducts.classList.remove("showOrHideSearchedProducts");
+  }
 
   const results = !searchTerm
     ? []
