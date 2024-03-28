@@ -6,7 +6,7 @@ import React, { useState } from "react";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const searchedProducts = document.getElementById("searchedProducts");
+
   const handleChange = (e) => {
     setInputValue(e.target.value);
     setSearchTerm(e.target.value);
@@ -14,7 +14,7 @@ function App() {
 
   const handleOnClick = (value) => {
     setInputValue(value);
-    setSearchTerm("");
+    setSearchTerm(value);
   };
 
   const results = !searchTerm
@@ -24,6 +24,16 @@ function App() {
           .toLocaleLowerCase()
           .includes(searchTerm.toLocaleLowerCase());
       });
+
+  const newFilteredRecipes = !searchTerm
+    ? recipes
+    : recipes.filter((recipe) =>
+        recipe.ingredients.some((ingredient) =>
+          ingredient
+            .toLocaleLowerCase()
+            .includes(searchTerm.toLocaleLowerCase()),
+        ),
+      );
   return (
     <div className="container">
       <h1>Recipe searcher</h1>
@@ -48,9 +58,16 @@ function App() {
           </div>
         ))}
       </div>
-      <div className="selectedProducts">
-        {recipes.map((recipe) => (
-          <div key={recipe.id}>{recipe.ingredients}</div>
+      <div className="filteredRecipes">
+        {newFilteredRecipes.map((recipe) => (
+          <div className="recipe" key={recipe.id}>
+            <h3>{recipe.name}</h3>
+            <p>
+              <h5>Ingredients:</h5>
+              {recipe.ingredients.join(", ")},
+            </p>
+            <a href={recipe.link}>Link</a>
+          </div>
         ))}
       </div>
     </div>

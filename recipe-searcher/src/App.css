@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100vw;
 }
 
 .searchingProductInput {
@@ -30,4 +31,21 @@
 
 .product {
   margin: 5px 0 5px 0;
+}
+
+.recipe {
+  width: 300px;
+  border: 1px grey solid;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.filteredRecipes {
+  margin: 30px;
+
+  display: flex;
+  width: auto;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
 }

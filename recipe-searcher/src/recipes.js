@@ -30,4 +30,17 @@ export const recipes = [
     ],
     link: "https://www.kwestiasmaku.com/przepis/kapusta-z-pieczarkami",
   },
+  {
+    id: 2,
+    name: "Spaghetti Bolognese",
+    ingredients: [
+      "mięso mielone",
+      "fix spaghetti Bolognese Knorr",
+      "makaron spaghetti",
+      "pomidory z puszki",
+      "olej",
+      "woda",
+    ],
+    link: "https://www.przepisy.pl/przepis/spaghetti-bolognese-2",
+  },
 ];
